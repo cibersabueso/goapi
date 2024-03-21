@@ -61,16 +61,14 @@ func (r *VaccinationRepository) GetAllVaccinations() ([]model.Vaccination, error
 }
 
 func (r *VaccinationRepository) DeleteVaccination(id int64) error {
-	// Ejemplo de consulta SQL para eliminar una vacunación
+
 	query := `DELETE FROM vaccinations WHERE id = $1;`
 
-	// Ejecuta la consulta
 	result, err := r.DB.Exec(query, id)
 	if err != nil {
 		return err
 	}
 
-	// Verifica que se haya eliminado al menos una fila
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
 		return err

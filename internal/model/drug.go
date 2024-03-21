@@ -1,6 +1,5 @@
 package model
 
-// Drug representa un medicamento en el sistema.
 type Drug struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`

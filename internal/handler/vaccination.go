@@ -28,9 +28,6 @@ func (h *VaccinationHandler) CreateVaccination(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	// Asumiendo que vaccination.Date ya es de tipo time.Time, no es necesario parsearlo.
-	// Si necesitas realizar alguna operación con la fecha, puedes hacerlo directamente.
-
 	id, err := h.Service.CreateVaccination(vaccination)
 	if err != nil {
 		http.Error(w, "Error al crear la vacunación: "+err.Error(), http.StatusInternalServerError)
@@ -74,7 +71,7 @@ func (h *VaccinationHandler) GetAllVaccinations(w http.ResponseWriter, r *http.R
 	}
 
 	if vaccinations == nil {
-		vaccinations = []model.Vaccination{} // Asegúrate de devolver un slice vacío en lugar de nil
+		vaccinations = []model.Vaccination{}
 	}
 
 	w.Header().Set("Content-Type", "application/json")

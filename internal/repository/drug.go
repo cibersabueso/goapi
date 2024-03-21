@@ -9,7 +9,6 @@ type DrugRepository struct {
 	DB *sql.DB
 }
 
-// CreateDrug es un método para crear un nuevo medicamento en la base de datos
 func (r *DrugRepository) CreateDrug(drug model.Drug) (int64, error) {
 	stmt, err := r.DB.Prepare("INSERT INTO drugs(name, approved, min_dose, max_dose, available_at) VALUES($1, $2, $3, $4, $5) RETURNING id")
 	if err != nil {
@@ -26,7 +25,6 @@ func (r *DrugRepository) CreateDrug(drug model.Drug) (int64, error) {
 	return drugID, nil
 }
 
-// UpdateDrug es un método para actualizar un medicamento existente en la base de datos
 func (r *DrugRepository) UpdateDrug(id int64, drug model.Drug) error {
 	stmt, err := r.DB.Prepare("UPDATE drugs SET name = $1, approved = $2, min_dose = $3, max_dose = $4, available_at = $5 WHERE id = $6")
 	if err != nil {
@@ -76,7 +74,6 @@ func (r *DrugRepository) DeleteDrug(id int64) error {
 	return nil
 }
 
-// GetDrugByID busca un medicamento por su ID y lo devuelve.
 func (r *DrugRepository) GetDrugByID(id int64) (*model.Drug, error) {
 	var drug model.Drug
 	query := `SELECT id, name, approved, min_dose, max_dose, available_at FROM drugs WHERE id = $1`

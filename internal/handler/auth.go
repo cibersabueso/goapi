@@ -11,7 +11,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// Signup maneja el registro de usuarios
 func Signup(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var user model.User
@@ -54,7 +53,6 @@ func Signup(db *sql.DB) http.HandlerFunc {
 	}
 }
 
-// Login maneja el inicio de sesión de usuarios
 func Login(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var credentials struct {

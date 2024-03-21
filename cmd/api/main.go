@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	// Cargar variables de entorno desde el archivo .env
+
 	if err := godotenv.Load(); err != nil {
 		log.Println("Advertencia: No se encontró el archivo .env o no se pudo cargar")
 	} else {
@@ -26,27 +26,22 @@ func main() {
 		log.Printf("JWT_EXPIRATION es: %s", os.Getenv("JWT_EXPIRATION"))
 	}
 
-	// Cargar configuración
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatalf("Error al cargar la configuración: %v", err)
 	}
 
-	// Crear conexión a la base de datos
 	db, err := postgres.NewDB(cfg)
 	if err != nil {
 		log.Fatalf("Error al conectar con la base de datos: %v", err)
 	}
 	defer db.Close()
 
-	// Crear el router
 	r := mux.NewRouter()
 
-	// Configurar rutas de autenticación
 	r.HandleFunc("/signup", handler.Signup(db)).Methods("POST")
 	r.HandleFunc("/login", handler.Login(db)).Methods("POST")
 
-	// Crear instancia de DrugHandler
 	drugHandler := &handler.DrugHandler{
 		Service: &service.DrugService{
 			Repo: &repository.DrugRepository{

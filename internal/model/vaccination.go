@@ -2,7 +2,6 @@ package model
 
 import "time"
 
-// Vaccination representa una vacunación en el sistema.
 type Vaccination struct {
 	ID     int64     `json:"id"`
 	Name   string    `json:"name"`

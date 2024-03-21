@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"context"
-	"goapi/pkg/jwt" // Asegúrate de importar tu paquete JWT correctamente
+	"goapi/pkg/jwt"
 	"net/http"
 	"strings"
 )
@@ -28,7 +28,6 @@ func ValidateJWT(next http.Handler) http.Handler {
 			return
 		}
 
-		// Opcional: Pasar el payload del token a la siguiente función en la cadena
 		ctx := context.WithValue(r.Context(), "userID", claims.UserID)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
